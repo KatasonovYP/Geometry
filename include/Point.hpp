@@ -1,16 +1,23 @@
 #pragma once
+#define _USE_MATH_DEFINES
 
 #include <cmath>
 #include <utility>
 #include <vector>
 
-class Point {
-    public:
-	int x, y;
-	Point(int x, int y): x(x), y(y) {}
-	Point() = default;
-};
+namespace Geometry {
 
-double length(const Point& a, const Point& b);
+    constexpr double EPS = 1e-9;
 
-std::pair <Point, Point> find_pair_nearest(std::vector <Point> &x);
+    class Point {
+        public:
+        double x, y;
+        Point(double x, double y): x(x), y(y) {}
+        Point() = default;
+    };
+
+    double length(const Point& a, const Point& b);
+
+    std::pair <Point, Point> find_pair_nearest(std::vector <Point> &x);
+
+}

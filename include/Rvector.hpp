@@ -2,14 +2,20 @@
 
 #include "Point.hpp"
 
-class Rvector : public Point {
-	public:
-		Rvector(const Point& a, const Point& b);
-		double length();
-};
+namespace Geometry {
 
-double cross_product(const Rvector& a, const Rvector& b);
+    class Rvector : public Point {
+        public:
+            Rvector(const Point& a, const Point& b);
+            double length();
+    };
 
-double scalar_product(const Rvector& a, const Rvector& b);
+    double cross_product(const Rvector& a, const Rvector& b);
 
-double cos_vec(Rvector& a, Rvector& b);
+    double scalar_product(const Rvector& a, const Rvector& b);
+
+    double cos_vec(Rvector& a, Rvector& b);
+
+    double angle(Rvector &a, Rvector& b);
+
+}

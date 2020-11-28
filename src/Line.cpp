@@ -1,57 +1,67 @@
 #include "Line.hpp"
 
-// constructors
-Line::Line(const Point& a, const Point& c) {
-    k = (a.y - c.y) / (a.x - c.x);
-    b = a.y - k * c.x;
-}
+namespace Geometry {
 
-Line::Line(const Segment& s) {
-    k = (s.get_point_a().y - s.get_point_b().y) / (s.get_point_a().x - s.get_point_b().x);
-    b = s.get_point_a().y - k * s.get_point_b().x;
-}
+    // constructors
+    Line::Line(const Point& a, const Point& c) {
+        if (std::abs(a.y - c.y) <= EPS) {
+            k = 0;
+        } else {
+            k = (a.y - c.y) / (a.x - c.x);
+        }
+        b = a.y - k * a.x;
+    }
 
-// setter
-void Line::set_k(double _k) {
-    k = _k;
-}
+    Line::Line(const Segment& s) {
+        k = (s.get_point_a().y - s.get_point_b().y) / (s.get_point_a().x - s.get_point_b().x);
+        b = s.get_point_a().y - k * s.get_point_b().x;
+    }
 
-void Line::set_b(double _b) {
-    b = _b;
-}
+    // setter
+    void Line::set_k(double _k) {
+        k = _k;
+    }
 
-// getter
-double Line::get_k() const {
-   return k;
-}
+    void Line::set_b(double _b) {
+        b = _b;
+    }
 
-double Line::get_b() const {
-    return b;
-}
+    // getter
+    double Line::get_k() const {
+       return k;
+    }
 
-// methods
-double Line::y(double x) {
-    return k * x + b;
-}
+    double Line::get_b() const {
+        return b;
+    }
 
-// functions
-Point intersect_line(Line& s, Line& t) {
-	double x = (t.get_b() - s.get_b()) / (s.get_k() - t.get_k());
-	Point i(x, s.y(x));
-	return i;
-}
+    // methods
+    double Line::y(double x) {
+        return k * x + b;
+    }
 
-double distance_from_point_to_line(Point& a, Line& s) {
-	double distance;
-	Point b(0, s.y(0));
-	Point c(1, s.y(1));
-	Rvector ac(a, c);
-	Rvector ab(a, b);
-	if(cross_product(ac, ab) == 0) {
-		distance = 0;
-	}
-	else {
-		distance = cross_product(ac, ab) / ab.length();
-	}
-	return std::abs(distance);
+    // functions
+    std::pair <std::string, Point> intersect_line(Line& s, Line& t) {
+        std::pair <std::string, Point> solution;
+        if(std::abs(s.get_k() - t.get_k()) <= EPS) {
+            if(std::abs(s.get_b() - t.get_b()) <= EPS) {
+                solution = std::make_pair("inf", Point());
+            } else {
+                solution = std::make_pair("no roots", Point());
+            }
+        } else {
+            double x = (t.get_b() - s.get_b()) / (s.get_k() - t.get_k());
+            solution = std::make_pair("one root", Point(x, s.y(x)));
+        }
+        return solution;
+    }
+
+    double distance_from_point_to_line(Point& a, Line& s) {
+        Point b(0, s.y(0));
+        Point c(1, s.y(1));
+        Rvector ab(a, b);
+        Rvector ac(a, c);
+        return std::abs(cross_product(ac, ab) / ab.length());
+    }
+
 }
