@@ -12,11 +12,6 @@ namespace Geometry {
         b = a.y - k * a.x;
     }
 
-    Line::Line(const Segment& s) {
-        k = (s.get_point_a().y - s.get_point_b().y) / (s.get_point_a().x - s.get_point_b().x);
-        b = s.get_point_a().y - k * s.get_point_b().x;
-    }
-
     // setter
     void Line::set_k(double _k) {
         k = _k;

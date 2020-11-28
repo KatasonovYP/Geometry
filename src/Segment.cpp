@@ -28,6 +28,10 @@ namespace Geometry {
     }
 
     // functions
+    Line make_line(const Segment& s) {
+        return Line(s.get_point_a(), s.get_point_b());
+    }
+
     double distance_from_point_to_segment(const Point& c, const Segment& s) {
         double distance;
         Rvector ac(s.get_point_a(), c);

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Rvector.hpp"
+#include "Line.hpp"
 
 namespace Geometry {
 
@@ -17,8 +17,8 @@ namespace Geometry {
             double length();
     };
 
-    double distance_from_point_to_segment(const Point& c, const Segment& s);
+    Line make_line(const Segment& s);
 
-    //std::pair <std::string, Point> intersect_segment(const Segment& a, const Segment& b);
+    double distance_from_point_to_segment(const Point& c, const Segment& s);
 
 }

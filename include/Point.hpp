@@ -4,6 +4,7 @@
 #include <cmath>
 #include <utility>
 #include <vector>
+#include <iostream>
 
 namespace Geometry {
 
@@ -14,6 +15,8 @@ namespace Geometry {
         double x, y;
         Point(double x, double y): x(x), y(y) {}
         Point() = default;
+        friend std::istream& operator>>(std::istream& in, Point p);
+        friend std::ostream& operator<<(std::ostream& out, const Point& p);
     };
 
     double length(const Point& a, const Point& b);

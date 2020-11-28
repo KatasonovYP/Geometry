@@ -2,6 +2,15 @@
 
 namespace Geometry {
 
+    // methods
+    std::istream& operator>>(std::istream& in, Point p){
+        return in >> p.x >> p.y;
+    }
+
+    std::ostream& operator<<(std::ostream& out, const Point& p) {
+        return out << '(' << p.x << ", " << p.y << ")\n";
+    }
+
     // functions
     double length (const Point& a, const Point& b) {
         double sideX = a.x - b.x;

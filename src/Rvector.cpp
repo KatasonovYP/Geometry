@@ -8,7 +8,7 @@ namespace Geometry {
         y = (b.y - a.y);
     }
 
-    // metods
+    // methods
     double Rvector::length() {
         return std::sqrt(x * x + y * y);
     }
